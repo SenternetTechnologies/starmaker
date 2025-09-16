@@ -1,1 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Starmaker Tools</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #111827; /* Dark gray background */
+        }
+        .tool-card {
+            background-color: #1F2937; /* Lighter gray for cards */
+            border: 1px solid #374151;
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2), 0 4px 6px -2px rgba(0, 0, 0, 0.1);
+        }
+        .category-title {
+            border-bottom: 2px solid #4B5563;
+        }
+    </style>
+</head>
+<body class="text-gray-200">
+
+    <div class="container mx-auto p-4 md:p-8">
+        
+        <!-- Header -->
+        <header class="text-center mb-10">
+            <h1 class="text-4xl md:text-5xl font-bold text-white tracking-tight">Starmaker Tools</h1>
+            <p class="text-lg md:text-xl text-gray-400 mt-2">Event by CANSING</p>
+        </header>
+
+        <main>
+            <!-- Categories -->
+            <div class="space-y-12">
+
+                <!-- Family Section -->
+                <section>
+                    <h2 class="category-title text-2xl font-semibold text-white pb-3 mb-6 flex items-center">
+                        <i data-lucide="users" class="w-6 h-6 mr-3 text-sky-400"></i>
+                        Family
+                    </h2>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                        <a href="https://m.starmakerstudios.com/v/family/account/668332?showBar=0&showNavigation=false&new=true" target="_blank" class="tool-card rounded-lg p-4 flex flex-col items-center justify-center text-center">
+                            <i data-lucide="dollar-sign" class="w-10 h-10 mb-3 text-green-400"></i>
+                            <span class="font-medium text-sm">Income</span>
+                        </a>
+                        <a href="https://m.starmakerstudios.com/a/spa-family-weekly/index?promotion_id=4195&showBar=1&showNavigation=true&new=true&date=20250907&family_id=668332" target="_blank" class="tool-card rounded-lg p-4 flex flex-col items-center justify-center text-center">
+                            <i data-lucide="bar-chart-3" class="w-10 h-10 mb-3 text-yellow-400"></i>
+                            <span class="font-medium text-sm">Weekly Report</span>
+                        </a>
+                        <a href="https://m.starmakerstudios.com/a-vue3/spa-family-recruitnew/index?showBar=0&showNavigation=false&new=true&pg_rf_ca_vn=7" target="_blank" class="tool-card rounded-lg p-4 flex flex-col items-center justify-center text-center">
+                            <i data-lucide="user-plus" class="w-10 h-10 mb-3 text-blue-400"></i>
+                            <span class="font-medium text-sm">Recruit</span>
+                        </a>
+                        <a href="https://m.starmakerstudios.com/a-vue3/spa-selfbuild-family-act/list?promotion_id=10496&showBar=0&showNavigation=false&new=true&load_mode=1" target="_blank" class="tool-card rounded-lg p-4 flex flex-col items-center justify-center text-center">
+                            <i data-lucide="calendar-check" class="w-10 h-10 mb-3 text-purple-400"></i>
+                            <span class="font-medium text-sm">Family Event</span>
+                        </a>
+                    </div>
+                </section>
+
+                <!-- Profile Section -->
+                <section>
+                    <h2 class="category-title text-2xl font-semibold text-white pb-3 mb-6 flex items-center">
+                        <i data-lucide="user-circle" class="w-6 h-6 mr-3 text-sky-400"></i>
+                        Profile
+                    </h2>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                         <a href="https://m.starmakerstudios.com/a-vue3/spa-vip-new-pro/index?showBar=0&showNavigation=false&pg_rf_ca_vn=6&page_source=vip_icon" target="_blank" class="tool-card rounded-lg p-4 flex flex-col items-center justify-center text-center"><i data-lucide="gem" class="w-10 h-10 mb-3 text-cyan-400"></i><span class="font-medium text-sm">Vip</span></a>
+                         <a href="https://m.starmakerstudios.com/a-vue3/game-center?showBar=0&showNavigation=false" target="_blank" class="tool-card rounded-lg p-4 flex flex-col items-center justify-center text-center"><i data-lucide="gamepad-2" class="w-10 h-10 mb-3 text-red-400"></i><span class="font-medium text-sm">Game Center</span></a>
+                         <a href="https://m.starmakerstudios.com/a-vue3/spa-noble-h5/?showBar=0&showNavigation=false&_sxiq_open_origin=Profile&pg_rf_ca_vn=75" target="_blank" class="tool-card rounded-lg p-4 flex flex-col items-center justify-center text-center"><i data-lucide="shield" class="w-10 h-10 mb-3 text-orange-400"></i><span class="font-medium text-sm">Noble</span></a>
+                         <a href="https://m.starmakerstudios.com/a-vue3/spa-recharge?showBar=0&showNavigation=false&new=true&uid=844424932338727&pg_rf_ca_vn=200&page_source=profile_recharge" target="_blank" class="tool-card rounded-lg p-4 flex flex-col items-center justify-center text-center"><i data-lucide="credit-card" class="w-10 h-10 mb-3 text-green-400"></i><span class="font-medium text-sm">Recharge</span></a>
+                         <a href="https://m.starmakerstudios.com/a-vue3/spa-creator-center/index?promotion_id=69960&showBar=0&showNavigation=false&pg_rf_ca_vn=22" target="_blank" class="tool-card rounded-lg p-4 flex flex-col items-center justify-center text-center"><i data-lucide="palette" class="w-10 h-10 mb-3 text-pink-400"></i><span class="font-medium text-sm">Creator</span></a>
+                         <a href="https://m.starmakerstudios.com/a-vue3/spa-user-certification/index?showBar=0&showNavigation=false&new=true" target="_blank" class="tool-card rounded-lg p-4 flex flex-col items-center justify-center text-center"><i data-lucide="verified" class="w-10 h-10 mb-3 text-blue-500"></i><span class="font-medium text-sm">Verified</span></a>
+                         <a href="https://m.starmakerstudios.com/a-vue3/spa-medal/index?showBar=0&showNavigation=false&isStatusBarStyle=true" target="_blank" class="tool-card rounded-lg p-4 flex flex-col items-center justify-center text-center"><i data-lucide="award" class="w-10 h-10 mb-3 text-yellow-500"></i><span class="font-medium text-sm">Badges</span></a>
+                         <a href="https://m.starmakerstudios.com/a-vue3/spa-privilege-tools/index?showBar=0&showNavigation=false&pg_rf_ca_vn=43" target="_blank" class="tool-card rounded-lg p-4 flex flex-col items-center justify-center text-center"><i data-lucide="wrench" class="w-10 h-10 mb-3 text-gray-400"></i><span class="font-medium text-sm">Tools</span></a>
+                         <a href="https://m.starmakerstudios.com/v/feedback/index?showBar=1&showNavigation=true&new=true&pg_rf_ca_vn=542" target="_blank" class="tool-card rounded-lg p-4 flex flex-col items-center justify-center text-center"><i data-lucide="help-circle" class="w-10 h-10 mb-3 text-indigo-400"></i><span class="font-medium text-sm">Faq</span></a>
+                         <a href="https://m.starmakerstudios.com/v/withdraw/income?showBar=1&showNavigation=true&new=true&pg_rf_ca_vn=542" target="_blank" class="tool-card rounded-lg p-4 flex flex-col items-center justify-center text-center"><i data-lucide="landmark" class="w-10 h-10 mb-3 text-teal-400"></i><span class="font-medium text-sm">Withdraw</span></a>
+                         <a href="https://m.starmakerstudios.com/a-vue3/spa-celebrities?promotion_id=1631&showBar=1&showNavigation=true&pg_rf_ca_vn=15" target="_blank" class="tool-card rounded-lg p-4 flex flex-col items-center justify-center text-center"><i data-lucide="star" class="w-10 h-10 mb-3 text-amber-400"></i><span class="font-medium text-sm">Celebrity</span></a>
+                         <a href="https://m.starmakerstudios.com/a/spa-live-record/index?showBar=0&showNavigation=false&new=true&pg_rf_ca_vn=14" target="_blank" class="tool-card rounded-lg p-4 flex flex-col items-center justify-center text-center"><i data-lucide="video" class="w-10 h-10 mb-3 text-rose-400"></i><span class="font-medium text-sm">My live</span></a>
+                         <a href="https://m.starmakerstudios.com/a/spa-agent-recharge/agentList?showBar=0&showNavigation=false&new=true&pg_rf_ca_vn=127" target="_blank" class="tool-card rounded-lg p-4 flex flex-col items-center justify-center text-center"><i data-lucide="briefcase" class="w-10 h-10 mb-3 text-lime-400"></i><span class="font-medium text-sm">Agency</span></a>
+                         <a href="https://m.starmakerstudios.com/a-vue3/taillight-popup-2023?showBar=0&showNavigation=false&new=true&heightPercent=70&pg_rf_ca_vn=14" target="_blank" class="tool-card rounded-lg p-4 flex flex-col items-center justify-center text-center"><i data-lucide="blinds" class="w-10 h-10 mb-3 text-fuchsia-400"></i><span class="font-medium text-sm">Taillight</span></a>
+                         <a href="https://m.starmakerstudios.com/a-vue3/spa-security-center/index?showBar=0&showNavigation=false" target="_blank" class="tool-card rounded-lg p-4 flex flex-col items-center justify-center text-center"><i data-lucide="lock" class="w-10 h-10 mb-3 text-slate-400"></i><span class="font-medium text-sm">Security Center</span></a>
+                    </div>
+                </section>
+
+                <!-- Miscellaneous Section -->
+                <section>
+                    <h2 class="category-title text-2xl font-semibold text-white pb-3 mb-6 flex items-center">
+                        <i data-lucide="app-window" class="w-6 h-6 mr-3 text-sky-400"></i>
+                        Miscellaneous
+                    </h2>
+                     <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                        <a href="https://m.starmakerstudios.com/a-vue3/spa-recharge/agent?showBar=0&showNavigation=false&new=true&fromMessage=true&pg_rf_ca_vn=200" target="_blank" class="tool-card rounded-lg p-4 flex flex-col items-center justify-center text-center"><i data-lucide="inbox" class="w-10 h-10 mb-3 text-blue-400"></i><span class="font-medium text-sm">Agent Recharge</span></a>
+                        <a href="https://m.starmakerstudios.com/a-vue3/active-level?showBar=0&showNavigation=false&new=true&tab=2" target="_blank" class="tool-card rounded-lg p-4 flex flex-col items-center justify-center text-center"><i data-lucide="bar-chart-horizontal" class="w-10 h-10 mb-3 text-green-400"></i><span class="font-medium text-sm">Level Normal</span></a>
+                        <a href="https://m.starmakerstudios.com/a-vue3/active-level?showBar=0&showNavigation=false&new=true" target="_blank" class="tool-card rounded-lg p-4 flex flex-col items-center justify-center text-center"><i data-lucide="trending-up" class="w-10 h-10 mb-3 text-yellow-400"></i><span class="font-medium text-sm">S Level</span></a>
+                        <a href="https://m.starmakerstudios.com/v/search-song/feedback?title=Request%20a%20Song&showNavigation=true&" target="_blank" class="tool-card rounded-lg p-4 flex flex-col items-center justify-center text-center"><i data-lucide="music-2" class="w-10 h-10 mb-3 text-red-400"></i><span class="font-medium text-sm">Request Song</span></a>
+                        <a href="https://m.starmakerstudios.com/a-vue3/original-song??showBar=1&showNavigation=true&title=Get%20the%20Original%20Songs&" target="_blank" class="tool-card rounded-lg p-4 flex flex-col items-center justify-center text-center"><i data-lucide="music" class="w-10 h-10 mb-3 text-purple-400"></i><span class="font-medium text-sm">Get Original Song</span></a>
+                        <a href="https://m.starmakerstudios.com/v/feedback/index?showBar=1&showNavigation=true&new=true&pg_rf_ca_vn=542" target="_blank" class="tool-card rounded-lg p-4 flex flex-col items-center justify-center text-center"><i data-lucide="alert-triangle" class="w-10 h-10 mb-3 text-orange-500"></i><span class="font-medium text-sm">Report Problem</span></a>
+                        <a href="https://m.starmakerstudios.com/a-vue3/profile-share?showBar=0&showNavigation=false&new=true&pg_rf_ca_vn=14" target="_blank" class="tool-card rounded-lg p-4 flex flex-col items-center justify-center text-center"><i data-lucide="share-2" class="w-10 h-10 mb-3 text-teal-400"></i><span class="font-medium text-sm">Profile Sharing</span></a>
+                        <a href="https://m.starmakerstudios.com/a/spa-wall/index?showBar=1&showNavigation=true&new=true&user_id=844424932338727" target="_blank" class="tool-card rounded-lg p-4 flex flex-col items-center justify-center text-center"><i data-lucide="gift" class="w-10 h-10 mb-3 text-pink-400"></i><span class="font-medium text-sm">Live Gifts</span></a>
+                        <a href="https://m.starmakerstudios.com/a/spa-live-record/giftUser?showBar=1&showNavigation=true&new=true" target="_blank" class="tool-card rounded-lg p-4 flex flex-col items-center justify-center text-center"><i data-lucide="clapperboard" class="w-10 h-10 mb-3 text-cyan-400"></i><span class="font-medium text-sm">Gifter Live</span></a>
+                        <a href="https://m.starmakerstudios.com/a/spa-live-record/pk?showBar=1&showNavigation=true&new=true" target="_blank" class="tool-card rounded-lg p-4 flex flex-col items-center justify-center text-center"><i data-lucide="swords" class="w-10 h-10 mb-3 text-red-500"></i><span class="font-medium text-sm">PK Records</span></a>
+                        <a href="https://m.starmakerstudios.com/a-vue3/spa-supernovax-s4-appreciate/index?showBar=0&showNavigation=false&source=newtab&tab_bar_height=82" target="_blank" class="tool-card rounded-lg p-4 flex flex-col items-center justify-center text-center"><i data-lucide="sparkles" class="w-10 h-10 mb-3 text-yellow-300"></i><span class="font-medium text-sm">Supernova</span></a>
+                     </div>
+                </section>
+                
+                 <!-- Friendship Section -->
+                <section>
+                    <h2 class="category-title text-2xl font-semibold text-white pb-3 mb-6 flex items-center">
+                        <i data-lucide="heart" class="w-6 h-6 mr-3 text-sky-400"></i>
+                        Friendship
+                    </h2>
+                     <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                        <a href="https://m.starmakerstudios.com/a-vue3/spa-intimacy-second/task?showBar=0&_sxom=0&_sxfo=0&offline_mode=false&_sxir=false&showNavigation=false&friend_id=394064" target="_blank" class="tool-card rounded-lg p-4 flex flex-col items-center justify-center text-center"><i data-lucide="clipboard-check" class="w-10 h-10 mb-3 text-emerald-400"></i><span class="font-medium text-sm">Intimacy Task</span></a>
+                        <a href="https://m.starmakerstudios.com/a-vue3/spa-intimacy-second/interests?showBar=0&_sxom=0&_sxfo=0&offline_mode=false&_sxir=false&showNavigation=false&friend_" target="_blank" class="tool-card rounded-lg p-4 flex flex-col items-center justify-center text-center"><i data-lucide="medal" class="w-10 h-10 mb-3 text-amber-500"></i><span class="font-medium text-sm">Privilege</span></a>
+                        <a href="https://m.starmakerstudios.com/a-vue3/spa-intimacy-second/dress?showBar=0&_sxom=0&_sxfo=0&offline_mode=false&_sxir=false&showNavigation=false&frie" target="_blank" class="tool-card rounded-lg p-4 flex flex-col items-center justify-center text-center"><i data-lucide="shirt" class="w-10 h-10 mb-3 text-sky-400"></i><span class="font-medium text-sm">Decoration</span></a>
+                        <a href="https://m.starmakerstudios.com/a-vue3/spa-intimacy-guide/advanced?showBar=0&showNavigation=false&uid_1=844424932338727&uid_2=3940649677839709" target="_blank" class="tool-card rounded-lg p-4 flex flex-col items-center justify-center text-center"><i data-lucide="arrow-up-circle" class="w-10 h-10 mb-3 text-rose-400"></i><span class="font-medium text-sm">Upgrade</span></a>
+                        <a href="https://m.starmakerstudios.com/a-vue3/spa-intimacy-second/message-board?showBar=0&_sxom=0&_sxfo=0&offline_mode=false&_sxir=false&showNavigation=false&_sxom=0" target="_blank" class="tool-card rounded-lg p-4 flex flex-col items-center justify-center text-center"><i data-lucide="message-square" class="w-10 h-10 mb-3 text-violet-400"></i><span class="font-medium text-sm">Message Board</span></a>
+                        <a href="https://m.starmakerstudios.com/a-vue3/spa-intimacy-second/blessings-list?showBar=0&_sxom=0&_sxfo=0&offline_mode=false&_sxir=false&showNavigation=false&user_id=844424932338727&friend_id=394064967783970" target="_blank" class="tool-card rounded-lg p-4 flex flex-col items-center justify-center text-center"><i data-lucide="trending-up" class="w-10 h-10 mb-3 text-lime-400"></i><span class="font-medium text-sm">Blessing Score</span></a>
+                        <a href="https://m.starmakerstudios.com/a-vue3/spa-intimacy-second/task?showBar=0&_sxom=0&_sxfo=0&offline_mode=false&_sxir=false&showNavigation=false&friend_id=394064" target="_blank" class="tool-card rounded-lg p-4 flex flex-col items-center justify-center text-center"><i data-lucide="heart-handshake" class="w-10 h-10 mb-3 text-pink-400"></i><span class="font-medium text-sm">Familiarity</span></a>
+                        <a href="https://m.starmakerstudios.com/a-vue3/spa-intimacy-second/token?promotion_id=2132&showBar=0&showNavigation=false&uid1=844424932338727&uid2=3940649677839709" target="_blank" class="tool-card rounded-lg p-4 flex flex-col items-center justify-center text-center"><i data-lucide="camera" class="w-10 h-10 mb-3 text-orange-400"></i><span class="font-medium text-sm">Momento</span></a>
+                     </div>
+                </section>
+
+            </div>
+        </main>
+        
+        <!-- Footer -->
+        <footer class="text-center mt-12 py-6 border-t border-gray-700">
+            <p class="text-gray-500">&copy; 2025 CANSING Events. All rights reserved.</p>
+        </footer>
+
+    </div>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
 
