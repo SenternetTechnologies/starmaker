@@ -6,8 +6,6 @@
     <title>Weekend Dice Master | 🔥𓆩🅲🆂𓆪🔥Events</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- Lucide Icons -->
-    <script src="https:// some-cdn.com/lucide.min.js"></script>
     <style>
         :root { 
             --primary: #4f46e5; 
@@ -78,9 +76,29 @@
         .player-card:hover { transform: translateY(-5px); background: #fff; }
 
         .banner-img { width: 100%; border-radius: 24px; margin-bottom: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        
+        /* Floating notification for sync */
+        #sync-toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #0f172a;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 100px;
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            z-index: 1001;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        #sync-toast.active { transform: translateX(-50%) translateY(0px); }
     </style>
 </head>
 <body class="p-4 md:p-10">
+
+    <div id="sync-toast">SYNCING TO CLOUD...</div>
 
     <!-- Intro Animation Sequence -->
     <div id="intro-overlay">
@@ -217,12 +235,13 @@
                 </div>
                 
                 <div class="flex justify-center gap-2" id="roll-history">
-                    <div class="w-2 h-2 rounded-full bg-slate-200"></div>
-                    <div class="w-2 h-2 rounded-full bg-slate-200"></div>
-                    <div class="w-2 h-2 rounded-full bg-slate-200"></div>
+                    <div class="w-2 h-2 rounded-full bg-slate-200 transition-all duration-300"></div>
+                    <div class="w-2 h-2 rounded-full bg-slate-200 transition-all duration-300"></div>
+                    <div class="w-2 h-2 rounded-full bg-slate-200 transition-all duration-300"></div>
                 </div>
 
-                <button onclick="performRoll()" id="roll-action-btn" class="w-full primary-btn py-5 rounded-2xl font-black text-xs tracking-widest uppercase">ROLL DICE</button>
+                <button onclick="performRoll()" id="roll-action-btn" class="w-full primary-btn py-5 rounded-2xl font-black text-xs tracking-widest uppercase shadow-lg shadow-indigo-100 active:scale-95 transition-transform">ROLL DICE</button>
+                <p id="roll-feedback" class="text-[9px] font-black text-indigo-400 uppercase tracking-widest h-2 opacity-0 transition-opacity">Round Added!</p>
             </div>
         </div>
     </div>
@@ -241,7 +260,7 @@
                 <p class="text-xs font-medium text-slate-500">Invite your friends to the weekend points race and compete for the Top 1 spot!</p>
                 <div class="bg-slate-50 p-3 rounded-xl flex items-center justify-between border border-slate-100">
                     <span class="text-[10px] font-bold text-slate-500 truncate mr-2">https://weekend-dice-master.web.app</span>
-                    <button onclick="document.execCommand('copy')" class="bg-indigo-600 text-white p-2 rounded-lg hover:bg-indigo-700">
+                    <button onclick="copyLink()" class="bg-indigo-600 text-white p-2 rounded-lg hover:bg-indigo-700 active:scale-90 transition-transform">
                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
                     </button>
                 </div>
@@ -271,13 +290,10 @@
         let currentRolls = [];
 
         window.onload = () => {
-            // Sequence of GIFs for intro
             const introImg = document.getElementById('intro-img');
             const introText = document.getElementById('intro-text-box');
             
-            // First GIF already loading (Dice one)
             setTimeout(() => {
-                // Switch to Skip GIF after 2 seconds
                 introImg.src = "https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHp1cWl5bmx4YmJid3ZpOWY0cjVtcXNhd2x3bzR6eGZ5dHB3bm03dyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/26u4b45b8KlgABfhe/giphy.gif";
                 introText.innerHTML = '<div class="text-xl font-black text-rose-500 tracking-widest uppercase">READY TO ROLL?</div>';
             }, 2500);
@@ -286,12 +302,11 @@
                 const overlay = document.getElementById('intro-overlay');
                 overlay.style.opacity = '0';
                 setTimeout(() => { overlay.style.display = 'none'; }, 800);
-            }, 4500); // Extended slightly to accommodate second GIF
+            }, 4500);
             
             loadPlayers();
         };
 
-        // All other logic functions remain identical to the previous version
         async function registerUser() {
             const sid = document.getElementById('sid-input').value.trim();
             if(!sid) return;
@@ -396,9 +411,10 @@
             if(currentRolls.length >= 3) return;
             const visual = document.getElementById('dice-visual');
             const btn = document.getElementById('roll-action-btn');
+            const feedback = document.getElementById('roll-feedback');
             
             btn.disabled = true;
-            visual.innerText = "🎲";
+            feedback.style.opacity = "0";
             visual.classList.add('dice-shake');
             
             const result = Math.floor(Math.random() * 6) + 1;
@@ -413,46 +429,92 @@
                 if(currentRolls.length === 3) {
                     if(currentRolls.every(r => r === 6)) {
                         alert("Triple 6! 💀 Cursed Roll! Round points discarded.");
-                        closeModal();
+                        resetRoundLocal();
                     } else {
                         const sum = currentRolls.reduce((a, b) => a + b, 0);
-                        btn.innerText = "SYNCING...";
-                        await syncPoints(activePlayer.sid, sum);
+                        // Start syncing in background
+                        syncPoints(activePlayer.sid, sum);
+                        
+                        // Show feedback that round is saved
+                        feedback.innerText = `+${sum} PTS ADDED!`;
+                        feedback.style.opacity = "1";
+                        
+                        // Wait a moment for the user to see the result, then reset for next round
+                        setTimeout(() => {
+                            resetRoundLocal();
+                            feedback.style.opacity = "0";
+                        }, 1200);
                     }
                 } else {
                     btn.disabled = false;
                 }
-            }, 1000);
+            }, 800);
+        }
+
+        function resetRoundLocal() {
+            currentRolls = [];
+            document.getElementById('dice-visual').innerText = "🎲";
+            document.getElementById('roll-action-btn').disabled = false;
+            updateUI();
         }
 
         async function syncPoints(sid, pts) {
+            showToast(true);
             try {
                 await fetch(API_URL, {
                     method: 'POST',
                     mode: 'no-cors',
                     body: JSON.stringify({ sid: sid, points: pts })
                 });
+                
+                // Update local memory data for instant feedback in modal
                 const p = allPlayers.find(x => x.sid == sid);
-                if(p) { p.points += pts; p.rounds += 1; }
+                if(p) { 
+                    p.points += pts; 
+                    p.rounds += 1; 
+                    if(activePlayer && activePlayer.sid == sid) {
+                        document.getElementById('modal-points').innerText = `${p.points} Pts`;
+                        document.getElementById('modal-rounds').innerText = `${p.rounds} RDS`;
+                    }
+                }
                 updateWinnerBanner();
                 filterPlayers();
-                setTimeout(() => closeModal(), 500);
-            } catch (e) { closeModal(); }
+            } catch (e) { console.error("Sync error:", e); }
+            showToast(false);
+        }
+
+        function showToast(show) {
+            const toast = document.getElementById('sync-toast');
+            if(show) toast.classList.add('active');
+            else setTimeout(() => toast.classList.remove('active'), 1000);
         }
 
         function openShareModal() { document.getElementById('share-modal').classList.add('active'); }
         function closeShareModal() { document.getElementById('share-modal').classList.remove('active'); }
         function closeModal() { document.getElementById('game-modal').classList.remove('active'); activePlayer = null; }
+        
         function updateUI() {
             const history = document.getElementById('roll-history');
-            history.innerHTML = '';
+            const dots = history.children;
             for(let i=0; i<3; i++) {
-                const dot = document.createElement('div');
-                dot.className = `w-2.5 h-2.5 rounded-full transition-all duration-500 ${i < currentRolls.length ? 'bg-indigo-500 scale-125 shadow-md' : 'bg-slate-200'}`;
-                history.appendChild(dot);
+                if(i < currentRolls.length) {
+                    dots[i].className = 'w-3 h-3 rounded-full bg-indigo-500 scale-125 shadow-md shadow-indigo-200';
+                } else {
+                    dots[i].className = 'w-2 h-2 rounded-full bg-slate-200';
+                }
             }
-            document.getElementById('roll-action-btn').disabled = false;
             document.getElementById('roll-action-btn').innerText = "ROLL DICE";
+        }
+
+        function copyLink() {
+            document.execCommand('copy');
+            const toast = document.getElementById('sync-toast');
+            toast.innerText = "LINK COPIED!";
+            showToast(true);
+            setTimeout(() => {
+                showToast(false);
+                setTimeout(() => toast.innerText = "SYNCING TO CLOUD...", 500);
+            }, 1500);
         }
 
         setInterval(loadPlayers, 30000); 
