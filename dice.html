@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Weekend Dice Master | 🔥𓆩🅲🆂𓆪🔥Events </title>
+    <title>Weekend Dice Master | 🔥𓆩🅲🆂𓆪🔥Events</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
@@ -12,7 +12,7 @@
             font-family: 'Plus Jakarta Sans', sans-serif; 
             color: #0f172a; 
             overflow-x: hidden;
-            background: url('https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExazB4dWgxd3U5eTBmZHpkdzMxNnJndzlpdmdpZW55a252dzBuY2M3bSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Yxf8YP0fL1pW8/giphy.gif') no-repeat center center fixed;
+            background: url('https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExazB4dWgxd3U5eTBmZHpkdzMxNnJndzlpdmdpZW55a252dzBuY2M3bSZlcD12MV9internalF9naWZfYnlfaWQmY3Q9Zw/Yxf8YP0fL1pW8/giphy.gif') no-repeat center center fixed;
             background-size: cover;
         }
         .apple-shadow { box-shadow: 0 10px 40px -10px rgba(0,0,0,0.15); }
@@ -67,6 +67,10 @@
         
         #hidden-dice-image { display: none; position: fixed; inset: 0; z-index: 600; background: rgba(0,0,0,0.95); align-items: center; justify-content: center; flex-direction: column; gap: 20px; }
         #hidden-dice-image img { max-width: 90%; max-height: 70%; border-radius: 20px; }
+
+        /* Search Bar Animation */
+        .search-container input:focus { width: 250px; }
+        @media (max-width: 640px) { .search-container input:focus { width: 100%; } }
     </style>
 </head>
 <body class="p-4 md:p-10">
@@ -80,16 +84,16 @@
 
     <!-- First Time Play Giphy Overlay -->
     <div id="fs-gif-overlay">
-        <img src="https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3Z2lpZGN2ZXZpMDJyZzM0dDRqcXVoMGIzdmQ4bjJsYm9razFkYWw0cCZlcD12MV9naWZzX3lFJTUzJTI2Y3Q9Zw/qmxASwVqFEyQ0oGuky/giphy.gif" alt="Celebration">
+        <img src="https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3Z2lpZGN2ZXZpMDJyZzM0dDRqcXVoMGIzdmQ4bjJsYm9razFkYWw0cCZlcD12MV9naWZzX3lEJTUzJTI2Y3Q9Zw/qmxASwVqFEyQ0oGuky/giphy.gif" alt="Celebration">
         <button onclick="closeFsGif()" class="skip-btn">SKIP / CLOSE</button>
     </div>
 
     <!-- Hidden Dice Image View -->
     <div id="hidden-dice-image">
-        <img src="dice1.jpg" onerror="this.src='https://picsum.photos/800/600?random=1'" alt="Dice Full View">
+        <img src="https://picsum.photos/800/600?random=1" alt="Dice Full View">
         <div class="flex gap-4">
             <button onclick="document.getElementById('hidden-dice-image').style.display='none'" class="px-8 py-3 bg-white text-black font-black rounded-full text-xs">CLOSE</button>
-            <button onclick="window.open('https://rebrand.ly/senternet', '_blank')" class="px-8 py-3 bg-indigo-600 text-white font-black rounded-full text-xs">SHARE</button>
+            <button onclick="window.open('https://rebrand.ly/senternet', '_blank')" class="px-8 py-3 bg-indigo-600 text-white font-black rounded-full text-xs">OFFICIAL SITE</button>
         </div>
     </div>
 
@@ -110,9 +114,8 @@
 
     <main class="max-w-6xl mx-auto">
         <section class="max-w-md mx-auto mb-16">
-            <!-- Dice Image Above SID -->
             <div class="mb-4 rounded-3xl overflow-hidden apple-shadow">
-                <img src="dice2.jpg" onerror="this.src='https://picsum.photos/800/400?random=2'" class="w-full object-cover h-42" alt="Dice Header">
+                <img src="https://picsum.photos/800/400?random=2" class="w-full object-cover h-42" alt="Dice Header">
             </div>
             
             <div class="apple-shadow p-6 rounded-[2.5rem] glass-ui">
@@ -121,19 +124,29 @@
                         class="flex-1 p-4 rounded-2xl bg-white border-2 border-transparent focus:border-indigo-500 outline-none font-bold text-sm transition-all shadow-inner">
                     <button onclick="registerUser()" id="reg-btn" class="primary-btn px-6 rounded-2xl font-black text-[10px] tracking-widest uppercase">JOIN</button>
                 </div>
-                <p class="text-[9px] text-center mt-4 text-slate-600 font-black uppercase tracking-tighter">By joining you visit our <a href="https://rebrand.ly/senternet" target="_blank" class="text-indigo-600 underline">Official Portal</a></p>
+                <p class="text-[9px] text-center mt-4 text-slate-600 font-black uppercase tracking-tighter">Official Portal: <a href="https://rebrand.ly/senternet" target="_blank" class="text-indigo-600 underline">Senternet Technologies</a></p>
+            </div>
+        </section>
+
+        <!-- Search and Filter Section -->
+        <section class="mb-8 flex flex-col md:flex-row items-center justify-between gap-4 px-2">
+            <h2 class="text-2xl font-black tracking-tight flex items-center gap-3 text-slate-900">
+                Live Leaderboard 
+                <span id="player-count" class="bg-indigo-600 text-white text-[10px] px-3 py-1 rounded-full shadow-lg">0 PLAYERS</span>
+            </h2>
+            <div class="flex gap-2 w-full md:w-auto search-container">
+                <input type="text" id="player-search" oninput="filterPlayers()" placeholder="Search Name or SID..." 
+                    class="glass-ui px-4 py-2 rounded-xl text-xs font-bold outline-none border-none focus:ring-2 focus:ring-indigo-400 w-full md:w-48 transition-all">
+                <select id="sort-filter" onchange="filterPlayers()" class="glass-ui px-3 py-2 rounded-xl text-[10px] font-black uppercase outline-none cursor-pointer">
+                    <option value="points">Top Points</option>
+                    <option value="rounds">Top Rounds</option>
+                    <option value="name">Name A-Z</option>
+                </select>
             </div>
         </section>
 
         <section class="space-y-8">
-            <div class="flex items-center justify-between px-2">
-                <h2 class="text-2xl font-black tracking-tight flex items-center gap-3 text-slate-900">
-                    Live Leaderboard 
-                    <span id="player-count" class="bg-indigo-600 text-white text-[10px] px-3 py-1 rounded-full shadow-lg">0 PLAYERS</span>
-                </h2>
-            </div>
-
-            <div id="player-grid" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
+            <div id="player-grid" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4 min-h-[200px]">
                 <!-- Data renders here -->
             </div>
         </section>
@@ -173,26 +186,24 @@
 
     <footer class="mt-20 border-t border-white/20 py-10 text-center space-y-4 glass-ui rounded-t-[3rem]">
         <a href="https://rebrand.ly/senternet" target="_blank" class="hover:opacity-80 transition-opacity">
-            <p class="text-slate-900 text-[10px] font-black uppercase tracking-[0.4em]">STARMAKER 🔥𓆩🅲🆂𓆪🔥 EVENTS TEAM - 2026</p>
+            <p class="text-slate-900 text-[10px] font-black uppercase tracking-[0.4em]">CANSING 🔥𓆩🅲🆂𓆪🔥Events Team - 2026</p>
         </a>
         <div class="flex items-center justify-center gap-2">
-            <img src="https://improxy.starmakerstudios.com/tools/im/200/production/users/844424932338727/profile.jpg?" class="w-8 h-8 rounded-full border-2 border-white shadow-sm" alt="CEO">
-            <p class="text-slate-900 text-[9px] font-black uppercase tracking-widest">CANSING 🔥𓆩🅲🆂𓆪🔥 | STARMAKER FAMILY: 668332</p>
+            <img src="https://www.jotform.com/uploads/senternettechnologies/agent_files/avatar_images/1000009224-6944f3cfaee596.07540393.webp" class="w-8 h-8 rounded-full border-2 border-white shadow-sm" alt="CEO Senthilkumar">
+            <p class="text-slate-900 text-[9px] font-black uppercase tracking-widest">CANSING FAMILY | STARMAKER FAMILY: 668332</p>
         </div>
     </footer>
 
     <script>
         const API_URL = "https://script.google.com/macros/s/AKfycbx_JdoTdZF1jA4MF3sNvXdEw431WR-PnKQiTUIEzviFMO0WM6aBLcZK9B48NqToV_XP/exec";
-        const BACKLINK_URL = "https://rebrand.ly/senternet";
         const DICE_ROLL_GIF = "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZDU3NmI5OHk4ZHR2bXNvNDEwbWFuYmMwZ3JnNHN2bXM5bG56b3kxayZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/JOSBoxT3dploPJ1ams/giphy.gif";
-        const FS_CELEBRATION_GIF = "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3Z2lpZGN2ZXZpMDJyZzM0dDRqcXVoMGIzdmQ4bjJsYm9razFkYWw0cCZlcD12MV9naWZzX3lEJTUzJTI2Y3Q9Zw/qmxASwVqFEyQ0oGuky/giphy.gif";
         
         let allPlayers = [];
+        let filteredPlayers = [];
         let activePlayer = null;
         let currentRolls = [];
 
         window.onload = () => {
-            // Check if first time
             const hasPlayed = localStorage.getItem('diceMaster_played');
             
             setTimeout(() => {
@@ -201,7 +212,6 @@
                 setTimeout(() => {
                     overlay.style.display = 'none';
                     if(!hasPlayed) {
-                        // Show FS Celebration GIF on first entry
                         document.getElementById('fs-gif-overlay').style.display = 'flex';
                     }
                 }, 800);
@@ -220,14 +230,13 @@
             
             const btn = document.getElementById('reg-btn');
             btn.disabled = true;
-            btn.innerText = "WAIT...";
-
-            window.open(BACKLINK_URL, '_blank');
+            btn.innerText = "FETCHING...";
 
             let userData = null;
             let attempts = 0;
             const maxAttempts = 3;
 
+            // Fetching without redirection - standard SID API fetch
             while (attempts < maxAttempts && !userData) {
                 try {
                     attempts++;
@@ -258,7 +267,7 @@
                     loadPlayers();
                 } catch (e) {}
             } else {
-                alert("SID not found. Check again.");
+                alert("SID not found or Network Error. Check again.");
             }
             
             btn.disabled = false;
@@ -269,16 +278,39 @@
             try {
                 const res = await fetch(API_URL + "?action=read");
                 allPlayers = await res.json();
-                renderPlayers();
+                filterPlayers(); // Update initial view
             } catch (e) {}
+        }
+
+        function filterPlayers() {
+            const searchTerm = document.getElementById('player-search').value.toLowerCase();
+            const sortBy = document.getElementById('sort-filter').value;
+
+            // Filter logic
+            filteredPlayers = allPlayers.filter(p => 
+                p.name.toLowerCase().includes(searchTerm) || 
+                p.sid.toString().includes(searchTerm)
+            );
+
+            // Sort logic
+            if (sortBy === 'points') filteredPlayers.sort((a, b) => b.points - a.points);
+            else if (sortBy === 'rounds') filteredPlayers.sort((a, b) => b.rounds - a.rounds);
+            else if (sortBy === 'name') filteredPlayers.sort((a, b) => a.name.localeCompare(b.name));
+
+            renderPlayers();
         }
 
         function renderPlayers() {
             const grid = document.getElementById('player-grid');
-            document.getElementById('player-count').innerText = `${allPlayers.length} PLAYERS`;
+            document.getElementById('player-count').innerText = `${filteredPlayers.length} PLAYERS`;
             grid.innerHTML = '';
             
-            allPlayers.sort((a,b) => b.points - a.points).forEach((p, i) => {
+            if (filteredPlayers.length === 0) {
+                grid.innerHTML = '<div class="col-span-full py-10 text-center font-bold text-slate-400">No players found.</div>';
+                return;
+            }
+
+            filteredPlayers.forEach((p) => {
                 const card = document.createElement('div');
                 card.className = "apple-shadow bg-white/90 rounded-[2rem] p-4 text-center border border-white/50 cursor-pointer hover:scale-[1.05] transition-all relative group backdrop-blur-sm";
                 card.onclick = () => openGameModal(p);
@@ -328,7 +360,6 @@
             
             btn.disabled = true;
             
-            // Show Roll GIF
             visual.style.display = "none";
             const gifImg = document.createElement('img');
             gifImg.src = DICE_ROLL_GIF + "?t=" + Date.now();
@@ -340,7 +371,6 @@
             const emojis = ['⚀', '⚁', '⚂', '⚃', '⚄', '⚅'];
 
             setTimeout(async () => {
-                // Remove GIF and show Result
                 const gif = document.getElementById('temp-gif');
                 if(gif) gif.remove();
                 
@@ -363,7 +393,7 @@
                 } else {
                     btn.disabled = false;
                 }
-            }, 1200); // GIF play time
+            }, 1200);
         }
 
         async function syncPoints(sid, pts) {
@@ -380,7 +410,7 @@
                     document.getElementById('modal-points').innerText = `${p.points} Pts`;
                     document.getElementById('modal-rounds').innerText = `${p.rounds} Rounds`;
                 }
-                renderPlayers();
+                filterPlayers();
             } catch (e) {}
         }
 
