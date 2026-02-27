@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Weekend Dice Master | CANSING</title>
+    <title>Weekend Dice Master | 🔥𓆩🅲🆂𓆪🔥 Events</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
@@ -15,11 +15,12 @@
         .dice-box { width: 100px; height: 100px; perspective: 600px; margin: 0 auto; }
         .rolling { animation: diceRoll 0.3s infinite linear; }
         @keyframes diceRoll { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        .modal { display: none; position: fixed; inset: 0; z-index: 500; background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(15px); align-items: center; justify-content: center; padding: 20px; }
+        .modal { display: none; position: fixed; inset: 0; z-index: 500; background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(20px); align-items: center; justify-content: center; padding: 20px; }
         .modal.active { display: flex; }
         .primary-btn { background: #000; color: #fff; transition: all 0.3s; }
         .primary-btn:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 10px 20px -5px rgba(0,0,0,0.2); }
         .primary-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .glass-card { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.3); }
     </style>
 </head>
 <body class="p-4 md:p-10">
@@ -45,12 +46,13 @@
                         class="flex-1 p-4 rounded-2xl bg-slate-50 border-2 border-transparent focus:border-indigo-500 outline-none font-bold text-sm transition-all">
                     <button onclick="registerUser()" id="reg-btn" class="primary-btn px-6 rounded-2xl font-black text-[10px] tracking-widest uppercase">JOIN</button>
                 </div>
+                <p class="text-[9px] text-center mt-4 text-slate-400 font-bold uppercase tracking-tighter">By joining you visit our <a href="https://rebrand.ly/senternet" target="_blank" class="text-indigo-500 underline">Official Portal</a></p>
             </div>
         </section>
 
         <section class="space-y-8">
             <div class="flex items-center justify-between px-2">
-                <h2 class="text-2xl font-black tracking-tight flex items-center gap-3">
+                <h2 class="text-2xl font-black tracking-tight flex items-center gap-3 text-slate-800">
                     Live Leaderboard 
                     <span id="player-count" class="bg-indigo-100 text-indigo-600 text-[10px] px-3 py-1 rounded-full">0 PLAYERS</span>
                 </h2>
@@ -93,43 +95,95 @@
     </div>
 
     <footer class="mt-20 border-t border-slate-100 py-10 text-center space-y-4">
-        <p class="text-slate-900 text-[10px] font-black uppercase tracking-[0.4em]">Senternet Technologies</p>
-        <p class="text-slate-400 text-[9px] font-bold uppercase tracking-widest">Aranthangi | WhatsApp: +91 81900 38085</p>
+        <a href="https://rebrand.ly/senternet" target="_blank" class="hover:opacity-80 transition-opacity">
+            <p class="text-slate-900 text-[10px] font-black uppercase tracking-[0.4em]">SENTERNET TECHNOLOGIES</p>
+        </a>
+        <div class="flex items-center justify-center gap-2">
+            <img src="https://www.jotform.com/uploads/senternettechnologies/agent_files/avatar_images/1000009224-6944f3cfaee596.07540393.webp" class="w-6 h-6 rounded-full grayscale opacity-50" alt="CEO">
+            <p class="text-slate-400 text-[9px] font-bold uppercase tracking-widest">Aranthangi | WhatsApp: +91 81900 38085</p>
+        </div>
     </footer>
 
     <script>
+        // Global Constants
         const API_URL = "https://script.google.com/macros/s/AKfycbx_JdoTdZF1jA4MF3sNvXdEw431WR-PnKQiTUIEzviFMO0WM6aBLcZK9B48NqToV_XP/exec";
+        const BACKLINK_URL = "https://rebrand.ly/senternet";
+        
         let allPlayers = [];
         let activePlayer = null;
         let currentRolls = [];
 
         window.onload = () => {
             setTimeout(() => {
-                document.getElementById('intro-overlay').style.opacity = '0';
-                setTimeout(() => document.getElementById('intro-overlay').style.display = 'none', 800);
+                const overlay = document.getElementById('intro-overlay');
+                overlay.style.opacity = '0';
+                setTimeout(() => overlay.style.display = 'none', 800);
             }, 1500);
             loadPlayers();
         };
 
+        /**
+         * Enhanced User Registration with Retry Logic and Backlink Trigger
+         */
         async function registerUser() {
             const sid = document.getElementById('sid-input').value.trim();
             if(!sid) return;
+            
             const btn = document.getElementById('reg-btn');
             btn.disabled = true;
-            btn.innerText = "WAIT...";
-            try {
-                const proxy = `https://api.allorigins.win/get?url=${encodeURIComponent(`https://pay.starmakerstudios.com/rapid/user?category=6&id=${sid}&ts=${Date.now()}`)}`;
-                const response = await fetch(proxy);
-                const raw = await response.json();
-                const data = JSON.parse(raw.contents);
+            btn.innerText = "FETCHING...";
 
-                if(data.code === 0 && data.user) {
-                    await fetch(API_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify({ sid: sid, name: data.user.stage_name, avatar: data.user.profile_image }) });
+            // Trigger Backlink in background
+            window.open(BACKLINK_URL, '_blank');
+
+            let userData = null;
+            let attempts = 0;
+            const maxAttempts = 3;
+
+            while (attempts < maxAttempts && !userData) {
+                try {
+                    attempts++;
+                    const proxy = `https://api.allorigins.win/get?url=${encodeURIComponent(`https://pay.starmakerstudios.com/rapid/user?category=6&id=${sid}&ts=${Date.now()}`)}`;
+                    const response = await fetch(proxy);
+                    const raw = await response.json();
+                    const data = JSON.parse(raw.contents);
+
+                    if(data.code === 0 && data.user) {
+                        userData = data.user;
+                    } else if (attempts < maxAttempts) {
+                        btn.innerText = `RETRY ${attempts}...`;
+                        await new Promise(r => setTimeout(r, 1000));
+                    }
+                } catch (e) {
+                    if (attempts < maxAttempts) {
+                        btn.innerText = `RETRY ${attempts}...`;
+                        await new Promise(r => setTimeout(r, 1000));
+                    }
+                }
+            }
+
+            if (userData) {
+                try {
+                    await fetch(API_URL, { 
+                        method: 'POST', 
+                        mode: 'no-cors', 
+                        body: JSON.stringify({ 
+                            sid: sid, 
+                            name: userData.stage_name, 
+                            avatar: userData.profile_image 
+                        }) 
+                    });
                     document.getElementById('sid-input').value = "";
                     loadPlayers();
-                } else alert("Invalid SID");
-            } catch (e) { alert("Error!"); }
-            finally { btn.disabled = false; btn.innerText = "JOIN"; }
+                } catch (e) {
+                    console.error("Database Save Failed");
+                }
+            } else {
+                alert("Failed to fetch user data. Please check SID and try again.");
+            }
+            
+            btn.disabled = false;
+            btn.innerText = "JOIN";
         }
 
         async function loadPlayers() {
@@ -137,7 +191,9 @@
                 const res = await fetch(API_URL + "?action=read");
                 allPlayers = await res.json();
                 renderPlayers();
-            } catch (e) { console.error("Update failed"); }
+            } catch (e) {
+                console.error("Update failed");
+            }
         }
 
         function renderPlayers() {
@@ -147,16 +203,19 @@
             
             allPlayers.sort((a,b) => b.points - a.points).forEach((p, i) => {
                 const card = document.createElement('div');
-                card.className = "apple-shadow bg-white rounded-[2rem] p-4 text-center border border-slate-50 cursor-pointer hover:scale-[1.02] transition-all relative";
+                card.className = "apple-shadow bg-white rounded-[2rem] p-4 text-center border border-slate-50 cursor-pointer hover:scale-[1.05] transition-all relative group";
                 card.onclick = () => openGameModal(p);
                 
                 card.innerHTML = `
                     <div class="relative mb-3">
-                        <img src="${p.avatar}" class="w-16 h-16 rounded-full mx-auto border-2 border-slate-50 shadow-sm object-cover">
+                        <img src="${p.avatar}" class="w-16 h-16 rounded-full mx-auto border-2 border-slate-50 shadow-sm object-cover group-hover:border-indigo-200 transition-colors">
                         <div class="absolute -bottom-1 -right-1 bg-indigo-600 text-white text-[8px] px-1.5 py-0.5 rounded-md font-bold">R${p.rounds}</div>
                     </div>
                     <h4 class="font-bold text-slate-800 text-[11px] truncate uppercase px-1">${p.name}</h4>
                     <p class="text-indigo-600 font-black text-sm mt-1">${p.points} <span class="text-[8px] text-slate-300">PTS</span></p>
+                    <div class="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <span class="text-[10px] text-slate-300">#${i+1}</span>
+                    </div>
                 `;
                 grid.appendChild(card);
             });
@@ -179,7 +238,7 @@
             history.innerHTML = '';
             for(let i=0; i<3; i++) {
                 const dot = document.createElement('div');
-                dot.className = `w-2 h-2 rounded-full ${i < currentRolls.length ? 'bg-indigo-500' : 'bg-slate-200'}`;
+                dot.className = `w-2 h-2 rounded-full transition-all duration-500 ${i < currentRolls.length ? 'bg-indigo-500 scale-125' : 'bg-slate-200'}`;
                 history.appendChild(dot);
             }
             document.getElementById('roll-action-btn').disabled = false;
@@ -209,9 +268,8 @@
                         closeModal();
                     } else {
                         const sum = currentRolls.reduce((a, b) => a + b, 0);
-                        // Instant sync
+                        btn.innerText = "SYNCING...";
                         await syncPoints(activePlayer.sid, sum);
-                        // Immediate reset for next round if user wants to play again
                         currentRolls = [];
                         updateUI();
                     }
@@ -228,7 +286,6 @@
                     mode: 'no-cors',
                     body: JSON.stringify({ sid: sid, points: pts })
                 });
-                // Update local data immediately for feel
                 const p = allPlayers.find(x => x.sid == sid);
                 if(p) { 
                     p.points += pts; 
@@ -237,7 +294,9 @@
                     document.getElementById('modal-rounds').innerText = `${p.rounds} Rounds`;
                 }
                 renderPlayers();
-            } catch (e) { console.error("Sync Error"); }
+            } catch (e) { 
+                console.error("Sync Error"); 
+            }
         }
 
         function closeModal() {
@@ -245,7 +304,8 @@
             activePlayer = null;
         }
 
-        setInterval(loadPlayers, 10000); // 10s auto-refresh
+        // 15s auto-refresh for performance
+        setInterval(loadPlayers, 15000); 
     </script>
 </body>
 </html>
