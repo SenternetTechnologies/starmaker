@@ -3,58 +3,133 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Weekend Dice Master | 🔥𓆩🅲🆂𓆪🔥 Events</title>
+    <title>Weekend Dice Master | 🔥𓆩🅲🆂𓆪🔥Events </title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root { --primary: #4f46e5; --accent: #f43f5e; }
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background: #ffffff; color: #0f172a; overflow-x: hidden; }
-        .apple-shadow { box-shadow: 0 10px 40px -10px rgba(0,0,0,0.05); }
-        #intro-overlay { position: fixed; inset: 0; z-index: 1000; background: #ffffff; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: all 0.8s cubic-bezier(0.65, 0, 0.35, 1); }
-        .intro-logo { font-size: 4rem; font-weight: 900; letter-spacing: -0.05em; background: linear-gradient(135deg, #4f46e5, #ec4899); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .dice-box { width: 100px; height: 100px; perspective: 600px; margin: 0 auto; }
-        .rolling { animation: diceRoll 0.3s infinite linear; }
-        @keyframes diceRoll { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        .modal { display: none; position: fixed; inset: 0; z-index: 500; background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(20px); align-items: center; justify-content: center; padding: 20px; }
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            color: #0f172a; 
+            overflow-x: hidden;
+            background: url('https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOXVkdzNjODQ2amkyY3c0b3p2eXo5MjN1ZXVmYWNlenp6YWJlbXNwYSZlcD12MV9naWZzX3lEJTUzJTI2Y3Q9Zw/DwOH6d4a7mFZHHluKf/giphy.gif') no-repeat center center fixed;
+            background-size: cover;
+        }
+        .apple-shadow { box-shadow: 0 10px 40px -10px rgba(0,0,0,0.15); }
+        
+        /* Intro Overlay with GIF */
+        #intro-overlay { 
+            position: fixed; 
+            inset: 0; 
+            z-index: 1000; 
+            background: #ffffff; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center; 
+            transition: all 0.8s cubic-bezier(0.65, 0, 0.35, 1); 
+        }
+        .intro-gif { width: 300px; border-radius: 20px; margin-bottom: 20px; }
+
+        /* Fullscreen First-Time GIF */
+        #fs-gif-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 2000;
+            background: #000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+        #fs-gif-overlay img { width: 100%; height: 100%; object-fit: contain; }
+        .skip-btn {
+            position: absolute;
+            bottom: 40px;
+            right: 40px;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            padding: 10px 25px;
+            border-radius: 99px;
+            backdrop-filter: blur(10px);
+            font-weight: 800;
+            font-size: 12px;
+            letter-spacing: 2px;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .dice-box { width: 120px; height: 120px; margin: 0 auto; display: flex; align-items: center; justify-content: center; }
+        .modal { display: none; position: fixed; inset: 0; z-index: 500; background: rgba(0, 0, 0, 0.4); backdrop-filter: blur(15px); align-items: center; justify-content: center; padding: 20px; }
         .modal.active { display: flex; }
         .primary-btn { background: #000; color: #fff; transition: all 0.3s; }
-        .primary-btn:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 10px 20px -5px rgba(0,0,0,0.2); }
-        .primary-btn:disabled { opacity: 0.5; cursor: not-allowed; }
-        .glass-card { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.3); }
+        .primary-btn:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 10px 20px -5px rgba(0,0,0,0.4); }
+        .glass-ui { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.4); }
+        
+        #hidden-dice-image { display: none; position: fixed; inset: 0; z-index: 600; background: rgba(0,0,0,0.95); align-items: center; justify-content: center; flex-direction: column; gap: 20px; }
+        #hidden-dice-image img { max-width: 90%; max-height: 70%; border-radius: 20px; }
     </style>
 </head>
 <body class="p-4 md:p-10">
 
+    <!-- Intro Animation -->
     <div id="intro-overlay">
-        <div class="intro-logo">DICE MASTER</div>
-        <p class="text-slate-400 font-bold tracking-[0.4em] text-[10px] mt-4 uppercase">Senternet Technologies</p>
+        <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExdDhxNndkOWt3enNkcWlqamNpN3FkNTBqOTJyd2E1dGJkdnFncXpiZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/XPf57biefJUjpbpV1l/giphy.gif" class="intro-gif" alt="Intro">
+        <div class="text-3xl font-black text-indigo-600 tracking-tighter uppercase">DICE MASTER</div>
+        <p class="text-slate-400 font-bold tracking-[0.4em] text-[10px] mt-2 uppercase">Senternet Technologies</p>
+    </div>
+
+    <!-- First Time Play Giphy Overlay -->
+    <div id="fs-gif-overlay">
+        <img src="https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3Z2lpZGN2ZXZpMDJyZzM0dDRqcXVoMGIzdmQ4bjJsYm9razFkYWw0cCZlcD12MV9naWZzX3lFJTUzJTI2Y3Q9Zw/qmxASwVqFEyQ0oGuky/giphy.gif" alt="Celebration">
+        <button onclick="closeFsGif()" class="skip-btn">SKIP / CLOSE</button>
+    </div>
+
+    <!-- Hidden Dice Image View -->
+    <div id="hidden-dice-image">
+        <img src="dice1.jpg" onerror="this.src='https://picsum.photos/800/600?random=1'" alt="Dice Full View">
+        <div class="flex gap-4">
+            <button onclick="document.getElementById('hidden-dice-image').style.display='none'" class="px-8 py-3 bg-white text-black font-black rounded-full text-xs">CLOSE</button>
+            <button onclick="window.open('https://rebrand.ly/senternet', '_blank')" class="px-8 py-3 bg-indigo-600 text-white font-black rounded-full text-xs">SHARE</button>
+        </div>
+    </div>
+
+    <!-- Top Right Action -->
+    <div class="fixed top-6 right-6 z-40">
+        <button onclick="document.getElementById('hidden-dice-image').style.display='flex'" class="w-12 h-12 glass-ui rounded-full flex items-center justify-center apple-shadow hover:scale-110 transition-transform">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="text-indigo-600"><path d="m5 12 7-7 7 7"/><path d="M12 19V5"/></svg>
+        </button>
     </div>
 
     <header class="max-w-4xl mx-auto text-center mb-12 space-y-4">
-        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-100 text-[10px] font-black uppercase tracking-widest text-slate-500">
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/60 backdrop-blur-md text-[10px] font-black uppercase tracking-widest text-slate-500 apple-shadow">
             🎲 Rolling Real-Time
         </div>
-        <h1 class="text-5xl font-black tracking-tighter text-slate-900">Weekend <span class="text-indigo-600">Points Race</span></h1>
-        <p class="text-slate-500 font-medium">Auto-sync enabled. 3 rolls per round. Every point counts towards the 40 coin grand prize.</p>
+        <h1 class="text-5xl font-black tracking-tighter text-slate-900 drop-shadow-sm">Weekend <span class="text-indigo-600">Points Race</span></h1>
+        <p class="text-slate-800 font-bold bg-white/40 inline-block px-4 py-1 rounded-lg backdrop-blur-sm">Auto-sync enabled. 3 rolls per round. Every point counts.</p>
     </header>
 
     <main class="max-w-6xl mx-auto">
         <section class="max-w-md mx-auto mb-16">
-            <div class="apple-shadow p-6 rounded-[2.5rem] bg-white border border-slate-100">
+            <!-- Dice Image Above SID -->
+            <div class="mb-4 rounded-3xl overflow-hidden apple-shadow">
+                <img src="dice1.jpg" onerror="this.src='https://picsum.photos/800/400?random=2'" class="w-full object-cover h-32" alt="Dice Header">
+            </div>
+            
+            <div class="apple-shadow p-6 rounded-[2.5rem] glass-ui">
                 <div class="flex gap-2">
                     <input type="number" id="sid-input" placeholder="Enter SID to Join" 
-                        class="flex-1 p-4 rounded-2xl bg-slate-50 border-2 border-transparent focus:border-indigo-500 outline-none font-bold text-sm transition-all">
+                        class="flex-1 p-4 rounded-2xl bg-white border-2 border-transparent focus:border-indigo-500 outline-none font-bold text-sm transition-all shadow-inner">
                     <button onclick="registerUser()" id="reg-btn" class="primary-btn px-6 rounded-2xl font-black text-[10px] tracking-widest uppercase">JOIN</button>
                 </div>
-                <p class="text-[9px] text-center mt-4 text-slate-400 font-bold uppercase tracking-tighter">By joining you visit our <a href="https://rebrand.ly/senternet" target="_blank" class="text-indigo-500 underline">Official Portal</a></p>
+                <p class="text-[9px] text-center mt-4 text-slate-600 font-black uppercase tracking-tighter">By joining you visit our <a href="https://rebrand.ly/senternet" target="_blank" class="text-indigo-600 underline">Official Portal</a></p>
             </div>
         </section>
 
         <section class="space-y-8">
             <div class="flex items-center justify-between px-2">
-                <h2 class="text-2xl font-black tracking-tight flex items-center gap-3 text-slate-800">
+                <h2 class="text-2xl font-black tracking-tight flex items-center gap-3 text-slate-900">
                     Live Leaderboard 
-                    <span id="player-count" class="bg-indigo-100 text-indigo-600 text-[10px] px-3 py-1 rounded-full">0 PLAYERS</span>
+                    <span id="player-count" class="bg-indigo-600 text-white text-[10px] px-3 py-1 rounded-full shadow-lg">0 PLAYERS</span>
                 </h2>
             </div>
 
@@ -66,7 +141,7 @@
 
     <!-- Game Modal -->
     <div id="game-modal" class="modal" onclick="if(event.target==this) closeModal()">
-        <div class="bg-white w-full max-w-sm rounded-[3rem] p-8 apple-shadow border border-slate-100 text-center space-y-6 relative">
+        <div class="bg-white/95 w-full max-w-sm rounded-[3rem] p-8 apple-shadow border border-white/40 text-center space-y-6 relative overflow-hidden">
             <button onclick="closeModal()" class="absolute top-6 right-6 text-slate-300 hover:text-slate-900">✕</button>
             
             <div class="space-y-2">
@@ -79,8 +154,10 @@
             </div>
 
             <div class="bg-slate-50 rounded-[2rem] p-6 space-y-6">
-                <div class="dice-box flex items-center justify-center">
-                    <div id="dice-visual" class="text-6xl">🎲</div>
+                <div class="dice-box">
+                    <div id="dice-container" class="w-full h-full flex items-center justify-center">
+                        <div id="dice-visual" class="text-6xl">🎲</div>
+                    </div>
                 </div>
                 
                 <div class="flex justify-center gap-2" id="roll-history">
@@ -94,46 +171,57 @@
         </div>
     </div>
 
-    <footer class="mt-20 border-t border-slate-100 py-10 text-center space-y-4">
+    <footer class="mt-20 border-t border-white/20 py-10 text-center space-y-4 glass-ui rounded-t-[3rem]">
         <a href="https://rebrand.ly/senternet" target="_blank" class="hover:opacity-80 transition-opacity">
             <p class="text-slate-900 text-[10px] font-black uppercase tracking-[0.4em]">SENTERNET TECHNOLOGIES</p>
         </a>
         <div class="flex items-center justify-center gap-2">
-            <img src="https://www.jotform.com/uploads/senternettechnologies/agent_files/avatar_images/1000009224-6944f3cfaee596.07540393.webp" class="w-6 h-6 rounded-full grayscale opacity-50" alt="CEO">
-            <p class="text-slate-400 text-[9px] font-bold uppercase tracking-widest">Aranthangi | WhatsApp: +91 81900 38085</p>
+            <img src="https://www.jotform.com/uploads/senternettechnologies/agent_files/avatar_images/1000009224-6944f3cfaee596.07540393.webp" class="w-8 h-8 rounded-full border-2 border-white shadow-sm" alt="CEO">
+            <p class="text-slate-900 text-[9px] font-black uppercase tracking-widest">Aranthangi | WhatsApp: +91 81900 38085</p>
         </div>
     </footer>
 
     <script>
-        // Global Constants
         const API_URL = "https://script.google.com/macros/s/AKfycbx_JdoTdZF1jA4MF3sNvXdEw431WR-PnKQiTUIEzviFMO0WM6aBLcZK9B48NqToV_XP/exec";
         const BACKLINK_URL = "https://rebrand.ly/senternet";
+        const DICE_ROLL_GIF = "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZDU3NmI5OHk4ZHR2bXNvNDEwbWFuYmMwZ3JnNHN2bXM5bG56b3kxayZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/JOSBoxT3dploPJ1ams/giphy.gif";
+        const FS_CELEBRATION_GIF = "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3Z2lpZGN2ZXZpMDJyZzM0dDRqcXVoMGIzdmQ4bjJsYm9razFkYWw0cCZlcD12MV9naWZzX3lEJTUzJTI2Y3Q9Zw/qmxASwVqFEyQ0oGuky/giphy.gif";
         
         let allPlayers = [];
         let activePlayer = null;
         let currentRolls = [];
 
         window.onload = () => {
+            // Check if first time
+            const hasPlayed = localStorage.getItem('diceMaster_played');
+            
             setTimeout(() => {
                 const overlay = document.getElementById('intro-overlay');
                 overlay.style.opacity = '0';
-                setTimeout(() => overlay.style.display = 'none', 800);
-            }, 1500);
+                setTimeout(() => {
+                    overlay.style.display = 'none';
+                    if(!hasPlayed) {
+                        // Show FS Celebration GIF on first entry
+                        document.getElementById('fs-gif-overlay').style.display = 'flex';
+                    }
+                }, 800);
+            }, 2500);
             loadPlayers();
         };
 
-        /**
-         * Enhanced User Registration with Retry Logic and Backlink Trigger
-         */
+        function closeFsGif() {
+            document.getElementById('fs-gif-overlay').style.display = 'none';
+            localStorage.setItem('diceMaster_played', 'true');
+        }
+
         async function registerUser() {
             const sid = document.getElementById('sid-input').value.trim();
             if(!sid) return;
             
             const btn = document.getElementById('reg-btn');
             btn.disabled = true;
-            btn.innerText = "FETCHING...";
+            btn.innerText = "WAIT...";
 
-            // Trigger Backlink in background
             window.open(BACKLINK_URL, '_blank');
 
             let userData = null;
@@ -155,10 +243,7 @@
                         await new Promise(r => setTimeout(r, 1000));
                     }
                 } catch (e) {
-                    if (attempts < maxAttempts) {
-                        btn.innerText = `RETRY ${attempts}...`;
-                        await new Promise(r => setTimeout(r, 1000));
-                    }
+                    if (attempts < maxAttempts) await new Promise(r => setTimeout(r, 1000));
                 }
             }
 
@@ -167,19 +252,13 @@
                     await fetch(API_URL, { 
                         method: 'POST', 
                         mode: 'no-cors', 
-                        body: JSON.stringify({ 
-                            sid: sid, 
-                            name: userData.stage_name, 
-                            avatar: userData.profile_image 
-                        }) 
+                        body: JSON.stringify({ sid: sid, name: userData.stage_name, avatar: userData.profile_image }) 
                     });
                     document.getElementById('sid-input').value = "";
                     loadPlayers();
-                } catch (e) {
-                    console.error("Database Save Failed");
-                }
+                } catch (e) {}
             } else {
-                alert("Failed to fetch user data. Please check SID and try again.");
+                alert("SID not found. Check again.");
             }
             
             btn.disabled = false;
@@ -191,9 +270,7 @@
                 const res = await fetch(API_URL + "?action=read");
                 allPlayers = await res.json();
                 renderPlayers();
-            } catch (e) {
-                console.error("Update failed");
-            }
+            } catch (e) {}
         }
 
         function renderPlayers() {
@@ -203,19 +280,16 @@
             
             allPlayers.sort((a,b) => b.points - a.points).forEach((p, i) => {
                 const card = document.createElement('div');
-                card.className = "apple-shadow bg-white rounded-[2rem] p-4 text-center border border-slate-50 cursor-pointer hover:scale-[1.05] transition-all relative group";
+                card.className = "apple-shadow bg-white/90 rounded-[2rem] p-4 text-center border border-white/50 cursor-pointer hover:scale-[1.05] transition-all relative group backdrop-blur-sm";
                 card.onclick = () => openGameModal(p);
                 
                 card.innerHTML = `
                     <div class="relative mb-3">
-                        <img src="${p.avatar}" class="w-16 h-16 rounded-full mx-auto border-2 border-slate-50 shadow-sm object-cover group-hover:border-indigo-200 transition-colors">
+                        <img src="${p.avatar}" class="w-16 h-16 rounded-full mx-auto border-2 border-white shadow-sm object-cover group-hover:border-indigo-400 transition-colors">
                         <div class="absolute -bottom-1 -right-1 bg-indigo-600 text-white text-[8px] px-1.5 py-0.5 rounded-md font-bold">R${p.rounds}</div>
                     </div>
                     <h4 class="font-bold text-slate-800 text-[11px] truncate uppercase px-1">${p.name}</h4>
-                    <p class="text-indigo-600 font-black text-sm mt-1">${p.points} <span class="text-[8px] text-slate-300">PTS</span></p>
-                    <div class="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                        <span class="text-[10px] text-slate-300">#${i+1}</span>
-                    </div>
+                    <p class="text-indigo-600 font-black text-sm mt-1">${p.points} <span class="text-[8px] text-slate-400">PTS</span></p>
                 `;
                 grid.appendChild(card);
             });
@@ -229,6 +303,7 @@
             document.getElementById('modal-points').innerText = `${player.points} Pts`;
             document.getElementById('modal-rounds').innerText = `${player.rounds} Rounds`;
             document.getElementById('dice-visual').innerText = "🎲";
+            document.getElementById('dice-visual').style.display = "block";
             document.getElementById('game-modal').classList.add('active');
             updateUI();
         }
@@ -238,7 +313,7 @@
             history.innerHTML = '';
             for(let i=0; i<3; i++) {
                 const dot = document.createElement('div');
-                dot.className = `w-2 h-2 rounded-full transition-all duration-500 ${i < currentRolls.length ? 'bg-indigo-500 scale-125' : 'bg-slate-200'}`;
+                dot.className = `w-2 h-2 rounded-full transition-all duration-500 ${i < currentRolls.length ? 'bg-indigo-600 scale-150' : 'bg-slate-200'}`;
                 history.appendChild(dot);
             }
             document.getElementById('roll-action-btn').disabled = false;
@@ -247,18 +322,30 @@
 
         function performRoll() {
             if(currentRolls.length >= 3) return;
-            const dice = document.getElementById('dice-visual');
+            const container = document.getElementById('dice-container');
+            const visual = document.getElementById('dice-visual');
             const btn = document.getElementById('roll-action-btn');
             
             btn.disabled = true;
-            dice.classList.add('rolling');
+            
+            // Show Roll GIF
+            visual.style.display = "none";
+            const gifImg = document.createElement('img');
+            gifImg.src = DICE_ROLL_GIF + "?t=" + Date.now();
+            gifImg.className = "w-24 h-24 object-contain";
+            gifImg.id = "temp-gif";
+            container.appendChild(gifImg);
             
             const result = Math.floor(Math.random() * 6) + 1;
             const emojis = ['⚀', '⚁', '⚂', '⚃', '⚄', '⚅'];
 
             setTimeout(async () => {
-                dice.classList.remove('rolling');
-                dice.innerText = emojis[result - 1];
+                // Remove GIF and show Result
+                const gif = document.getElementById('temp-gif');
+                if(gif) gif.remove();
+                
+                visual.style.display = "block";
+                visual.innerText = emojis[result - 1];
                 currentRolls.push(result);
                 updateUI();
 
@@ -276,7 +363,7 @@
                 } else {
                     btn.disabled = false;
                 }
-            }, 600);
+            }, 1200); // GIF play time
         }
 
         async function syncPoints(sid, pts) {
@@ -294,9 +381,7 @@
                     document.getElementById('modal-rounds').innerText = `${p.rounds} Rounds`;
                 }
                 renderPlayers();
-            } catch (e) { 
-                console.error("Sync Error"); 
-            }
+            } catch (e) {}
         }
 
         function closeModal() {
@@ -304,7 +389,6 @@
             activePlayer = null;
         }
 
-        // 15s auto-refresh for performance
         setInterval(loadPlayers, 15000); 
     </script>
 </body>
