@@ -109,13 +109,13 @@
             🎲 Rolling Real-Time
         </div>
         <h1 class="text-5xl font-black tracking-tighter text-slate-900 drop-shadow-sm">Weekend <span class="text-indigo-600">Points Race</span></h1>
-        <p class="text-slate-800 font-bold bg-white/40 inline-block px-4 py-1 rounded-lg backdrop-blur-sm">Auto-sync enabled. 3 rolls per round. Every point counts.</p>
+        <p class="text-slate-800 font-bold bg-white/40 inline-block px-4 py-1 rounded-lg backdrop-blur-sm">Auto-sync enabled. 3 rolls per round. Every point counts. Top point holder as a winner</p>
     </header>
 
     <main class="max-w-6xl mx-auto">
         <section class="max-w-md mx-auto mb-16">
             <div class="mb-4 rounded-3xl overflow-hidden apple-shadow">
-                <img src="https://picsum.photos/800/400?random=2" class="w-full object-cover h-42" alt="Dice Header">
+                <img src="dice2.jpg" class="w-full object-cover h-42" alt="Dice Header">
             </div>
             
             <div class="apple-shadow p-6 rounded-[2.5rem] glass-ui">
@@ -240,7 +240,7 @@
             while (attempts < maxAttempts && !userData) {
                 try {
                     attempts++;
-                    const proxy = `https://api.allorigins.win/get?url=${encodeURIComponent(`https://pay.starmakerstudios.com/rapid/user?category=6&id=${sid}&ts=${Date.now()}`)}`;
+                    const proxy = `https://api.allorigins.win/get?url=${encodeURIComponent(`https://pay.starmakerstudios.com/rapid/user?category=6&id=${sid}`)}`;
                     const response = await fetch(proxy);
                     const raw = await response.json();
                     const data = JSON.parse(raw.contents);
